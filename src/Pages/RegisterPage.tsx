@@ -114,7 +114,7 @@ function RegisterPage() {
                     <FormLabel>您的暱稱</FormLabel>
                     <FormControl>
                       <Input
-                        type="nickname"
+                        type="text"
                         disabled={isLoading}
                         className="h-12 px-4 py-3 bg-white"
                         placeholder="請輸入您的暱稱"

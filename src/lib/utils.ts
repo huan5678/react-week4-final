@@ -17,20 +17,26 @@ export function formatMoney(num: number): string {
   );
 }
 
-async function useFetch({ path, method, headers, data }: FetchProps) {
-  const baseUrl = "https://todolist-api.hexschool.io";
+const token = getCookie('token');
+
+const headers = {
+  Accept: 'application/json',
+  'Content-type': 'application/json',
+  Authorization: token || '',
+};
+
+async function useFetch({path, method, data}: FetchProps) {
+  const baseUrl = 'https://todolist-api.hexschool.io';
   const url = baseUrl + path;
+
   try {
     const response = await fetch(url, {
       method,
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
-      },
-      body: JSON.stringify(data),
+      headers: new Headers(headers),
+      body: data ? JSON.stringify(data) : undefined,
     });
     if (response.status === 401) {
-      sessionStorage.removeItem("apiChecked");
+      sessionStorage.removeItem('apiChecked');
     }
     const json = await response.json();
     return {
@@ -43,36 +49,25 @@ async function useFetch({ path, method, headers, data }: FetchProps) {
   }
 }
 
-const token = getCookie("token");
-
 export function GET(path: string) {
   return useFetch({
     path,
-    method: "GET",
-    headers: {
-      authorization: token,
-    },
+    method: 'GET',
   });
 }
 
-export function POST({ path, data }: { path: string; data?: unknown }) {
+export function POST({path, data}: {path: string; data?: unknown}) {
   return useFetch({
     path,
-    method: "POST",
-    headers: {
-      authorization: token,
-    },
+    method: 'POST',
     data,
   });
 }
 
-export function PUT({ path, data }: { path: string; data: unknown }) {
+export function PUT({path, data}: {path: string; data: unknown}) {
   return useFetch({
     path,
-    method: "PUT",
-    headers: {
-      authorization: token,
-    },
+    method: 'PUT',
     data,
   });
 }
@@ -80,20 +75,14 @@ export function PUT({ path, data }: { path: string; data: unknown }) {
 export function PATCH(path: string) {
   return useFetch({
     path,
-    method: "PATCH",
-    headers: {
-      authorization: token,
-    },
+    method: 'PATCH',
   });
 }
 
 export function DELETE(path: string) {
   return useFetch({
     path,
-    method: "DELETE",
-    headers: {
-      authorization: token,
-    },
+    method: 'DELETE',
   });
 }
 

@@ -32,7 +32,6 @@ type Data = unknown;
 type FetchProps = {
   path: Url;
   method: Method;
-  headers?: Headers;
   params?: Params;
   data?: Data;
 };

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiLoaderAlt } from "react-icons/bi";
-import { getCookie, handleOnCheckout } from "@/lib/utils";
+import { handleOnCheckout } from "@/lib/utils";
 import { toast } from "sonner";
 
 function HomePage() {

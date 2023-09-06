@@ -37,7 +37,7 @@ const registerFormSchema = z.object({
 }).required().refine((data) => data.password === data.confirm, {
   message: "請確認兩次輸入的密碼均為相同",
   path: [ "confirm" ],
-});;
+});
 
 function RegisterPage() {
   const [ isLoading, setIsLoading ] = useState(false);
@@ -64,7 +64,7 @@ function RegisterPage() {
       form.reset();
       setIsLoading(false);
       navigate("/login");
-    }    
+    }
     if (!res.status) {
       toast.error(res.message);
       setIsLoading(false);

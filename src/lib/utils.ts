@@ -17,18 +17,17 @@ export function formatMoney(num: number): string {
   );
 }
 
-const token = getCookie('token');
 
-const headers = {
-  Accept: 'application/json',
-  'Content-type': 'application/json',
-  Authorization: token || '',
-};
 
 async function useFetch({path, method, data}: FetchProps) {
+  const token = getCookie('token');
+  const headers = {
+    Accept: 'application/json',
+    'Content-type': 'application/json',
+    Authorization: token || '',
+  };
   const baseUrl = 'https://todolist-api.hexschool.io';
   const url = baseUrl + path;
-
   try {
     const response = await fetch(url, {
       method,

@@ -34,6 +34,7 @@ type FetchProps = {
   method: Method;
   params?: Params;
   data?: Data;
+  token?: string;
 };
 
 type TodoProps = {

@@ -55,7 +55,6 @@ function TodoPage() {
     async function checkout() {
       const res = await handleOnCheckout();
       if (res.status) {
-        getCookie("");
         toast.success(`Hi ~ ${res.nickname} 歡迎回來`);
         handleGetTodo();
       }

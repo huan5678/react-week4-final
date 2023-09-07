@@ -19,12 +19,12 @@ export function formatMoney(num: number): string {
 
 
 
-async function useFetch({path, method, data}: FetchProps) {
-  const token = getCookie('token');
+async function useFetch({path, method, data, token}: FetchProps) {
+  if (token === undefined) token = getCookie('token');
   const headers = {
     Accept: 'application/json',
     'Content-type': 'application/json',
-    Authorization: token || '',
+    authorization: token || '',
   };
   const baseUrl = 'https://todolist-api.hexschool.io';
   const url = baseUrl + path;
@@ -87,14 +87,14 @@ export function DELETE(path: string) {
 
 export async function handleOnCheckout() {
   try {
-    const res = await GET("/users/checkout");
+    const res = await GET('/users/checkout');
     if (!res.status) {
       return false;
     }
     if (res.status) {
       setCookie({
-        name: "apiChecked",
-        content: "true",
+        name: 'apiChecked',
+        content: 'true',
         expiryDays: 3,
       });
       return res;

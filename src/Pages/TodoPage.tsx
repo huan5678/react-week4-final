@@ -44,6 +44,7 @@ function TodoPage() {
       toast.success("成功新增待辦事項");
       setTodo("");
       setIsLoading(false);
+      setSelectTab("allTodos");
       handleGetTodo();
     }
     if (!res.status) {
@@ -105,6 +106,12 @@ function TodoPage() {
               id="todo"
               name="todo"
               onChange={(e) => setTodo(e.target.value.trim())}
+              onKeyDown={(e) =>
+              {
+                if (e.key === "Enter") {
+                  handleCreateTodo();
+                }
+              }}
               value={todo}
               pattern=".*\S+.*"
               title="內容不能為空或只包含空白字符"
